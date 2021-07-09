@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { UserService } from './services/user.service';
 import { User } from './User'
 
@@ -10,12 +10,20 @@ import { User } from './User'
 })
 export class AppComponent implements OnInit {
   public users: User[];
-
+  public showingEditModal : boolean = false;
+  public toEditUser: User;
+  
   constructor(private userService: UserService) { }
 
   ngOnInit() {
     console.log(this.users);
     this.getUsers();
+  }
+
+  toggleEditModal(user: User) {
+    this.showingEditModal = !this.showingEditModal;
+    this.toEditUser = user;
+  
   }
 
   public getUsers(): void  {

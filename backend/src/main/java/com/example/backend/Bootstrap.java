@@ -48,9 +48,9 @@ public class Bootstrap implements ApplicationListener<ApplicationReadyEvent> {
             Role regularUser = roleRepository.findByName(ERole.USER)
                     .orElseThrow(() -> new EntityNotFoundException("Couldn't find role: USER"));
 
-            String[] names = {"Zi Quintero", "Arun Li", "Rikesh Singleton", "Fahim Craig", "Ema Crowther", "Hawa Santiago", "Xena Hull", "Rhodri Amin", "Leona Klein", "Ceara Gamble", "Bushra Sutherland", "Erika Emerson", "Reis Duggan", "Evalyn Bellamy", "Finlay Burks,Estelle Phelps", "Cairo Walsh", "Gracie-May Guest", "Eden Martin", "Evie-Rose Knights", "Gino King", "Danyal Whitley"};
+            String[] names = {"Zi Quintero", "Arun Li", "Rikesh Singleton", "Fahim Craig", "Ema Crowther", "Hawa Santiago", "Xena Hull", "Rhodri Amin", "Leona Klein", "Ceara Gamble", "Bushra Sutherland", "Erika Emerson", "Reis Duggan", "Evalyn Bellamy", "Finlay Burks" , "Estelle Phelps", "Cairo Walsh", "Gracie-May Guest", "Eden Martin", "Evie-Rose Knights", "Gino King", "Danyal Whitley"};
 
-            for(int i = 0; i < 25; i++) {
+            for(int i = 0; i < 3; i++) {
                 User user = User.builder().username("User" + i).email("my_email" + i + "@gmail.com").password("my_pass" + i)
                         .fullName(getRandomName(names))
                         .roles(new HashSet<Role>(asList(regularUser))).build();

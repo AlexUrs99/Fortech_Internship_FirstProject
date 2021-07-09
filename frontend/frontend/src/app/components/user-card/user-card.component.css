@@ -1,34 +1,41 @@
-body{
-    background-color: #f7f7ff;
-    margin-top:20px;
+h1 { color: #111; font-size: 50px; font-weight: bold; letter-spacing: -1px; line-height: 1; }
+
+.forButtons {
+    display: inline-block;
+    margin: auto;
 }
-.btn-white {
-    background-color: #fff;
-    border-color: #e7eaf3;
+
+.container h4 {
+    font-weight: bold;
 }
-.radius-15 {
-    border-radius: 15px;
+
+.miniheader {
+    position: relative;
+    justify-content: space-between;
 }
-.contacts-social a {
-    font-size: 16px;
-    width: 36px;
-    height: 36px;
-    line-height: 36px;
-    background: #ffffff;
-    border: 1px solid #eeecec;
-    text-align: center;
-    border-radius: 50%;
-    color: #2b2a2a;
-}
-.bg-info {
-    background-color: #0dcaf0!important;
-}
-.bg-primary {
-    background-color: #008cff!important;
-}
-.bg-danger {
-    background-color: #fd3550!important;
-}
-.bg-warning {
-    background-color: #ffc107!important;
-}
+.btn {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: inherit;
+  }
+  .btn:focus {
+    outline: none;
+  }
+  .btn:active {
+    transform: scale(0.98);
+  }
+  
+  .btn-block {
+    display: block;
+    width: 100%;
+  }
+
+

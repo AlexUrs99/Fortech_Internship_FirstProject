@@ -1,1 +1,41 @@
-<p>{{user.username}}</p>
+<div class="container">
+   <div class="miniheader">
+      <i class="fas fa-user fa-4x"></i>
+      <h1>{{ user.fullName }}</h1>
+   </div>
+
+    <mat-divider></mat-divider>
+    <div class="lilCel">
+      <h4>Username: </h4>
+      <span>{{ user.username }}</span>
+    </div>
+    
+    <mat-divider></mat-divider>
+
+    <div class="lilCel">
+      <h4>Email: </h4>
+      <span>{{ user.email }}</span>
+    </div>
+    
+    <mat-divider></mat-divider>
+
+    <div class="lilCel">
+      <h4>Password: </h4>
+      <span>{{ user.password }}</span>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="lilCel">
+      <h4>Roles: </h4><span>{{ user.roles }}</span>
+
+      <mat-divider></mat-divider>  
+    </div>
+  
+    <br>
+
+   <div class="forButtons">
+      <button class="btn" (click)="editButtonClicked()">Edit</button>
+      <button class="btn" style="background-color: crimson;">Delete</button>
+   </div>
+</div>

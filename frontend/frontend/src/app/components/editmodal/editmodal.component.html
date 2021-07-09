@@ -1,0 +1,36 @@
+<div class="backdrop">
+    <div class="modal">
+        <div class="modal-content">
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()" >
+            Value: {{ editForm.value | json }}
+
+            <hr>
+
+            <mat-form-field>
+                <input matInput placeholder="{{ editedUser.username }}" formControlName="username">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="{{ editedUser.fullName }}" formControlName="fullName">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="{{ editedUser.email }}" formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="{{ editedUser.password }}" formControlName="password">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <h4>Select your roles:</h4>
+                <p><mat-checkbox formControlName="roles">User</mat-checkbox></p>
+                <p><mat-checkbox formControlName="roles">Administrator</mat-checkbox></p>
+            </mat-form-field>
+
+            <button type="submit" [disabled]="!editForm .valid">Submit</button>
+        </form>
+
+        
+    </div>
+</div>
