@@ -1,36 +1,57 @@
 <div class="backdrop">
-    <div class="modal">
-        <div class="modal-content">
+    <div class="modal-content">
+        
+
+            <div class="miniHeader">
+                <h1>Edit Modal </h1>
+                <i class="fas fa-times fa-3x" style="color:crimson" (click)="closeEditModal()"></i>
+            </div>
+            
         <form [formGroup]="editForm" (ngSubmit)="onSubmit()" >
-            Value: {{ editForm.value | json }}
+
+            Value : {{ editForm.value | json}}
 
             <hr>
 
-            <mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Username: </mat-label>
                 <input matInput placeholder="{{ editedUser.username }}" formControlName="username">
             </mat-form-field>
 
-            <mat-form-field>
-                <input matInput placeholder="{{ editedUser.fullName }}" formControlName="fullName">
-            </mat-form-field>
+            <br>
 
-            <mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Email: </mat-label>
                 <input matInput placeholder="{{ editedUser.email }}" formControlName="email">
             </mat-form-field>
 
-            <mat-form-field>
+            <br>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Full name: </mat-label>
+                <input matInput placeholder="{{ editedUser.fullName }}" formControlName="fullName">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Password: </mat-label>
                 <input matInput placeholder="{{ editedUser.password }}" formControlName="password">
             </mat-form-field>
 
-            <mat-form-field appearance="fill">
-                <h4>Select your roles:</h4>
-                <p><mat-checkbox formControlName="roles">User</mat-checkbox></p>
-                <p><mat-checkbox formControlName="roles">Administrator</mat-checkbox></p>
-            </mat-form-field>
+            <br>
 
-            <button type="submit" [disabled]="!editForm .valid">Submit</button>
+            <h2>Please select your roles: </h2>
+
+            <div formGroupName="roles">
+
+            <mat-checkbox indeterminate="false" color="primary" formControlName="user" >User</mat-checkbox>
+            <br>
+            <mat-checkbox indeterminate="false" color="primary" formControlName="administrator">Administrator</mat-checkbox>
+            </div>
+            <br>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="!editForm.valid">Submit</button>
         </form>
-
-        
+        </div>
     </div>
-</div>

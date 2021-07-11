@@ -9,8 +9,9 @@ import { EventEmitter } from '@angular/core';
   styleUrls: ['./user-card.component.css']
 })
 export class UserCardComponent implements OnInit {
-  @Input() user: User;
+  @Input() user: User
   @Output() editModalTrigger = new EventEmitter()
+  @Output() deleteModalTrigger = new EventEmitter()
 
   constructor() { }
 
@@ -18,9 +19,15 @@ export class UserCardComponent implements OnInit {
   }
 
   editButtonClicked() {
-    this.editModalTrigger.emit(this.user);
-    console.log('Edit button has been clicked! (user-card)');
-    console.log('Emitting user: ', this.user);
+    this.editModalTrigger.emit(this.user)
+    console.log('Edit button has been clicked! (user-card)')
+    console.log('Emitting user: ', this.user)
+  }
+
+  deleteButtonClicked() {
+    this.deleteModalTrigger.emit(this.user.id)
+    console.log('Delete button has been clicked! (user-card)')
+    console.log('Deleting user at id: ', this.user.id)
   }
 
 }

@@ -8,20 +8,24 @@ import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserService } from './services/user.service';
 import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button'; 
-import {MatDividerModule} from '@angular/material/divider';
-import { EditmodalComponent } from './components/editmodal/editmodal.component'; 
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { EditmodalComponent } from './components/editmodal/editmodal.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field'; 
-import {MatSelectModule} from '@angular/material/select'; 
-import {MatCheckbox, MatCheckboxModule} from '@angular/material/checkbox'; 
+import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { DeletemodalComponent } from './components/deletemodal/deletemodal.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     UserCardComponent,
     HeaderComponent,
-    EditmodalComponent
+    EditmodalComponent,
+    DeletemodalComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,9 @@ import {MatCheckbox, MatCheckboxModule} from '@angular/material/checkbox';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatInputModule,
+
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

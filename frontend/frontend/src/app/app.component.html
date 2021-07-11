@@ -2,6 +2,14 @@
 <app-user-card *ngFor="let user of users" [user]="user" (editModalTrigger)="toggleEditModal(user)"></app-user-card>
 
 <div>
-    <app-editmodal *ngIf="showingEditModal" [editedUser]="toEditUser"></app-editmodal>
+    <app-editmodal *ngIf="showingEditModal"
+                    [editedUser]="toEditUser"
+                    (onCloseEditModal)="closeEditModal()"
+                    (onEditFormSubmitted)="performEditPutRequest($event)"
+     ></app-editmodal>
 </div>
-
+<div>
+    <app-deletemodal *ngIf="showingDeleteModal"
+                      (deleteModalTrigger)="toggleDeleteModal()"
+    ></app-deletemodal>
+</div>
