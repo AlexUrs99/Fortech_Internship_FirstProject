@@ -14,14 +14,12 @@ export class EditmodalComponent implements OnInit {
   @Input() editedUser: User;
   @Output() onCloseEditModal = new EventEmitter()
   @Output() onEditFormSubmitted = new EventEmitter<User>()
-  // isShowingModal : boolean = false
   editForm: FormGroup;
   
 
   constructor(private fb : FormBuilder) { }
 
   ngOnInit(): void {
-    // this.isShowingModal = true
 
     this.editForm = this.fb.group({
       username: new FormControl(this.editedUser.username),

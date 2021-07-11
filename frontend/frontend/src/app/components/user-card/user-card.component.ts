@@ -25,7 +25,7 @@ export class UserCardComponent implements OnInit {
   }
 
   deleteButtonClicked() {
-    this.deleteModalTrigger.emit(this.user.id)
+    this.deleteModalTrigger.emit(this.user)
     console.log('Delete button has been clicked! (user-card)')
     console.log('Deleting user at id: ', this.user.id)
   }

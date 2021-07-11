@@ -17,9 +17,9 @@
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
-    height:780px;
-    width: 500px;
-    border-radius: 50px;
+    height: 300px;
+    width: 300px;
+    border-radius: 25px;
     border-color: black;
     font-family: "Poppins", sans-serif;
   }

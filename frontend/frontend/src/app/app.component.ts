@@ -14,8 +14,8 @@ export class AppComponent implements OnInit {
   showingEditModal : boolean = false
   showingDeleteModal: boolean = false
   toEditUser: User
-  private userBody: User
-  private userIdForDelete: number
+  toDeleteUser: User
+  userBody: User
   
   constructor(private userService: UserService) { }
 
@@ -28,14 +28,33 @@ export class AppComponent implements OnInit {
     this.toEditUser = user
   }
 
+  toggleDeleteModal(user: User) {
+    this.showingDeleteModal = !this.showingDeleteModal
+    this.toDeleteUser = user
+  }
+
   closeEditModal() {
-    console.log('I arrived here')
     this.showingEditModal = false
   }
 
-  toggleDeleteModal() {
-    this.showingDeleteModal = !this.showingDeleteModal
-    console.log(this.showingDeleteModal)
+  closeDeleteModal() {
+    this.showingDeleteModal = false
+  }
+
+  public deleteUser(user: User) : void {
+    console.log(user)
+    this.userService.deleteUser(user.id).subscribe(
+      () => {
+        console.log('success when deleting')
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message)
+      })
+  }
+
+  performDeleteRequest(user: User) {
+    this.showingDeleteModal = false
+    this.deleteUser(user)
   }
 
   performEditPutRequest(receivedUserBody: User) {

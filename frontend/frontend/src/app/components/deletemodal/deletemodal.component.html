@@ -1,11 +1,11 @@
 <div class="backdrop">
     <div class="modal-content">
-        <h1>Are you sure you want to delete this ? </h1>
+        <h1>Are you sure you want to delete this ?</h1>
 
         <hr>
 
-        <button mat-raised-button color="warn">Cancel</button>
-        <button mat-raised-button color="success">Yes</button>
+        <button mat-raised-button color="warn" (click)="toggleDeleteModal()">Cancel</button>
+        <button mat-raised-button color="success" (click)="deleteRequestAccepted()">Yes</button>
 
     </div>
 </div>
