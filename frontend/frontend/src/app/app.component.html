@@ -1,5 +1,4 @@
-<app-header>
-    
+<app-header (onAddButtonClicked)="toggleAddModal()">
 </app-header>
 <app-user-card *ngFor="let user of users"
              [user]="user"
@@ -21,4 +20,14 @@
                     (onDeleteButton)="closeDeleteModal()"
                     (what)="performDeleteRequest($event)"
     ></app-deletemodal>
+</div>
+
+<div>
+    <app-addmodal *ngIf="showingAddModal"
+                (onCloseAdd)="toggleAddModal()"
+                (onAddFormSubmitted)="performPostAddRequest($event)"
+
+    >
+
+    </app-addmodal>
 </div>

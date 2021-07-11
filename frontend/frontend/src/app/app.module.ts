@@ -16,7 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { DeletemodalComponent } from './components/deletemodal/deletemodal.component';
-import { AddmodalComponent } from './addmodal/addmodal.component';
+import { AddmodalComponent } from './components/addmodal/addmodal.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon'; 
 import { HeaderComponent } from './header/header.component'; 

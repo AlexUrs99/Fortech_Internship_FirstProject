@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   users: User[]
   showingEditModal : boolean = false
   showingDeleteModal: boolean = false
+  showingAddModal: boolean = false
   toEditUser: User
   toDeleteUser: User
   userBody: User
@@ -33,12 +34,34 @@ export class AppComponent implements OnInit {
     this.toDeleteUser = user
   }
 
+  toggleAddModal() {
+    this.showingAddModal = !this.showingAddModal
+    console.log('add modal', this.showingAddModal)
+  }
+
   closeEditModal() {
     this.showingEditModal = false
   }
 
   closeDeleteModal() {
     this.showingDeleteModal = false
+  }
+
+  performPostAddRequest(user: User) {
+    user.roles = this.convertToArrayRoles(user);
+    this.addUser(user);
+    this.showingAddModal = false
+  }
+
+  public addUser(user: User) {
+    this.userService.createUser(user).subscribe(
+      (response: User) => {
+        console.log('created', user)
+      },
+      (error : HttpErrorResponse) => {
+        alert(error.message)
+      }
+    )
   }
 
   public deleteUser(user: User) : void {

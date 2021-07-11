@@ -1,0 +1,53 @@
+.backdrop {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow:inherit; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .miniHeader {
+    display: flex;
+    justify-content: space-between;
+    text-align: justify;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .modal-content {
+    position: relative;
+    background-color: gray;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    height:780px;
+    width: 500px;
+    border-radius: 50px;
+    border-color: black;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  
+  
+   label {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: "Poppins", sans-serif;
+  }
+  
+   input {
+    display: block;
+    width: max-content;
+  
+    border-bottom: 1px solid #ddd;
+    color: #555;
+  }  
+  

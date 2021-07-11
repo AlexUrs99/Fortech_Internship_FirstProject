@@ -1,0 +1,57 @@
+<div class="backdrop">
+    <div class="modal-content">
+        
+
+            <div class="miniHeader">
+                <h1>Add Modal </h1>
+                <i class="fas fa-times fa-3x" style="color:crimson" (click)="closeAddModal()"></i>
+            </div>
+            
+        <form [formGroup]="addForm" (ngSubmit)="onSubmit()" >
+
+            Value : {{ addForm.value | json}}
+
+            <hr>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Username: </mat-label>
+                <input matInput placeholder="Username" formControlName="username">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Email: </mat-label>
+                <input matInput placeholder="Email" formControlName="email">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Full name: </mat-label>
+                <input matInput placeholder="Full name" formControlName="fullName">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Password: </mat-label>
+                <input matInput placeholder="Password" formControlName="password">
+            </mat-form-field>
+
+            <br>
+
+            <h2>Please select your roles: </h2>
+
+            <div formGroupName="roles">
+
+            <mat-checkbox indeterminate="false" color="primary" formControlName="user" >User</mat-checkbox>
+            <br>
+            <mat-checkbox indeterminate="false" color="primary" formControlName="administrator">Administrator</mat-checkbox>
+            </div>
+            <br>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="!addForm.valid">Submit</button>
+        </form>
+        </div>
+    </div>

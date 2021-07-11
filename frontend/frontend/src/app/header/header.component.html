@@ -6,8 +6,10 @@
     </button>
     <span>Just a toolbar</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
+            (click)="toggleAddModal()">
+      <span style="margin-left:20px; font-size: 25px;" >Add user</span>
+      <mat-icon>add</mat-icon>
     </button>
   </mat-toolbar>
   </p>
