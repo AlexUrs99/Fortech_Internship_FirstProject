@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/User';
 import { EventEmitter } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -13,15 +14,18 @@ export class UserCardComponent implements OnInit {
   @Output() editModalTrigger = new EventEmitter()
   @Output() deleteModalTrigger = new EventEmitter()
 
-  constructor() { }
+  constructor( private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+    })
+    
   }
 
   editButtonClicked() {
     this.editModalTrigger.emit(this.user)
     console.log('Edit button has been clicked! (user-card)')
-    console.log('Emitting user: ', this.user)
+    console.log('Emitting user: ', this.user )
   }
 
   deleteButtonClicked() {

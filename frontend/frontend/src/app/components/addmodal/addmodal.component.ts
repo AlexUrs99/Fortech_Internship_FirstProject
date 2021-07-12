@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/User';
 
 @Component({
@@ -16,15 +16,43 @@ export class AddmodalComponent implements OnInit {
 
   ngOnInit(): void {
     this.addForm = this.fb.group({
-      username: new FormControl(null),
+      username: new FormControl(null, [
+        Validators.required
+      ]),
       fullName:  new FormControl(null),
-      email: new FormControl(null),
-      password: new FormControl(null),
+      email: new FormControl(null, [
+        Validators.required,
+        Validators.email
+      ]),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')
+      ]),
       roles: this.fb.group({
-        user: false,
-        administrator: false
+        user: new FormControl(false),
+        administrator: new FormControl(false)
       })
     })
+  }
+
+  get email() {
+    return this.addForm.get('email')
+  }
+
+  get password() {
+    return this.addForm.get('password')
+  }
+
+  get username() {
+    return this.addForm.get('username')
+  }
+
+  get fullName() {
+    return this.addForm.get('fullName')
+  }
+
+  get roles() {
+    return this.addForm.get('roles')
   }
 
   closeAddModal() {

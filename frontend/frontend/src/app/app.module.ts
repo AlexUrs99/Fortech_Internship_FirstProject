@@ -17,9 +17,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { DeletemodalComponent } from './components/deletemodal/deletemodal.component';
 import { AddmodalComponent } from './components/addmodal/addmodal.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon'; 
-import { HeaderComponent } from './header/header.component'; 
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './components/home/home.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { RouterModule } from '@angular/router';
+import { routingComponents } from './app-routing.module';
+import { UsersComponent } from './users/users.component';
 
 
 @NgModule({
@@ -29,7 +34,12 @@ import { HeaderComponent } from './header/header.component';
     EditmodalComponent,
     DeletemodalComponent,
     AddmodalComponent,
-    HeaderComponent
+    HeaderComponent,
+    HomeComponent,
+    NotFoundComponent,
+    routingComponents,
+    UsersComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +54,8 @@ import { HeaderComponent } from './header/header.component';
     MatCheckboxModule,
     MatInputModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule
 
   ],
   providers: [UserService],
