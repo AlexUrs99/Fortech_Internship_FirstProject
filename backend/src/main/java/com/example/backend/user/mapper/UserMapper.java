@@ -1,7 +1,7 @@
 package com.example.backend.user.mapper;
 
-import com.example.backend.user.model.ERole;
-import com.example.backend.user.model.Role;
+import com.example.backend.user.model.ETrait;
+import com.example.backend.user.model.Trait;
 import com.example.backend.user.model.User;
 import com.example.backend.user.model.dto.UserDTO;
 import org.mapstruct.Mapper;
@@ -14,23 +14,23 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    @Mapping(source = "roles", target = "roles", qualifiedByName = "RoleToString")
+    @Mapping(source = "traits", target = "traits", qualifiedByName = "TraitToString")
     UserDTO toDTO(User user);
 
-    @Mapping(source = "roles", target = "roles", qualifiedByName = "StringToRole")
+    @Mapping(source = "traits", target = "traits", qualifiedByName = "StringToTrait")
     User fromDTO(UserDTO userDTO);
 
-    @Named("RoleToString")
-    static Set<String> mapRolesToStrings(Set<Role> roles) {
-        return roles.stream()
-                .map(role -> role.getName().name())
+    @Named("TraitToString")
+    static Set<String> mapTraitsToStrings(Set<Trait> traits) {
+        return traits.stream()
+                .map(trait -> trait.getName().name())
                 .collect(Collectors.toSet());
     }
 
-    @Named("StringToRole")
-    static Set<Role> mapStringsToRoles(Set<String> roles) {
-        return roles.stream()
-                .map(roleStr -> Role.builder().name(ERole.valueOf(roleStr)).build())
+    @Named("StringToTrait")
+    static Set<Trait> mapStringToTraits(Set<String> traits) {
+        return traits.stream()
+                .map(traitStr -> Trait.builder().name(ETrait.valueOf(traitStr)).build())
                 .collect(Collectors.toSet());
     }
 }

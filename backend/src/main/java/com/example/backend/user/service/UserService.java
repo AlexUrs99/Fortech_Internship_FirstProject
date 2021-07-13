@@ -1,11 +1,11 @@
 package com.example.backend.user.service;
 
 import com.example.backend.user.mapper.UserMapper;
-import com.example.backend.user.model.ERole;
-import com.example.backend.user.model.Role;
+import com.example.backend.user.model.ETrait;
+import com.example.backend.user.model.Trait;
 import com.example.backend.user.model.User;
 import com.example.backend.user.model.dto.UserDTO;
-import com.example.backend.user.repository.RoleRepository;
+import com.example.backend.user.repository.TraitRepository;
 import com.example.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    private final TraitRepository traitRepository;
     private final UserMapper userMapper;
 
     public List<UserDTO> getAllUsers() {
@@ -55,16 +55,16 @@ public class UserService {
             userToBeCreated.setPassword(userDTO.getPassword());
         }
 
-        userToBeCreated.setRoles(mapRoles(userDTO.getRoles()));
+        userToBeCreated.setTraits(mapTraits(userDTO.getTraits()));
 
         User savedUser = userRepository.save(userToBeCreated);
         return userMapper.toDTO(savedUser);
     }
 
-    private Set<Role> mapRoles(Set<String> roles) {
-        return roles.stream()
-                .map(role -> roleRepository.findByName(ERole.valueOf(role))
-                        .orElseThrow(() -> new EntityNotFoundException("Couldn't find role: " + role.toUpperCase())))
+    private Set<Trait> mapTraits(Set<String> traits) {
+        return traits.stream()
+                .map(trait -> traitRepository.findByName(ETrait.valueOf(trait))
+                        .orElseThrow(() -> new EntityNotFoundException("Couldn't find trait: " + trait.toUpperCase())))
                 .collect(Collectors.toSet());
     }
 
@@ -79,7 +79,7 @@ public class UserService {
 
     public UserDTO editUser(Long id, UserDTO user) {
         User actUser = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
-        actUser.setRoles(mapRoles(user.getRoles()));
+        actUser.setTraits(mapTraits(user.getTraits()));
 
         verifyDataUnique(actUser, user);
 

@@ -4,5 +4,5 @@ export interface User {
     fullName: string,
     email: string,
     password: string,
-    roles: String[]
+    traits: String[]
 };

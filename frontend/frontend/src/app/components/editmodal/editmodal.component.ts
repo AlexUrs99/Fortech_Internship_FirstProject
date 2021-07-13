@@ -26,9 +26,11 @@ export class EditmodalComponent implements OnInit {
       fullName:  new FormControl(this.editedUser.fullName),
       email: new FormControl(this.editedUser.email),
       password: new FormControl(this.editedUser.password),
-      roles: this.fb.group({
-        user: this.editedUser.roles.includes('USER'),
-        administrator: this.editedUser.roles.includes('ADMINISTRATOR')
+      traits: this.fb.group({
+        courageous: this.editedUser.traits.includes('COURAGEOUS'),
+        focused: this.editedUser.traits.includes('FOCUSED'),
+        caring: this.editedUser.traits.includes('CARING'),
+        perfectionist: this.editedUser.traits.includes('PERFECTIONIST')
       })
     })
   }

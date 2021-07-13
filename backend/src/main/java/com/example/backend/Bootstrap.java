@@ -1,9 +1,9 @@
 package com.example.backend;
 
-import com.example.backend.user.model.ERole;
-import com.example.backend.user.model.Role;
+import com.example.backend.user.model.ETrait;
+import com.example.backend.user.model.Trait;
 import com.example.backend.user.model.User;
-import com.example.backend.user.repository.RoleRepository;
+import com.example.backend.user.repository.TraitRepository;
 import com.example.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +22,7 @@ import static java.util.Arrays.asList;
 public class Bootstrap implements ApplicationListener<ApplicationReadyEvent> {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    private final TraitRepository traitRepository;
 
     @Value("${app.boostrap}")
     private boolean bootstrap;
@@ -37,34 +37,38 @@ public class Bootstrap implements ApplicationListener<ApplicationReadyEvent> {
     public void onApplicationEvent(ApplicationReadyEvent event) {
         if (bootstrap) {
             userRepository.deleteAll();
-            roleRepository.deleteAll();
+            traitRepository.deleteAll();
 
-            for (ERole value : ERole.values()) {
-                roleRepository.save(Role.builder().name(value).build());
+            for (ETrait value : ETrait.values()) {
+                traitRepository.save(Trait.builder().name(value).build());
             }
 
-            Role admin = roleRepository.findByName(ERole.ADMINISTRATOR)
-                    .orElseThrow(() -> new EntityNotFoundException("Couldn't find role: ADMINISTRATOR."));
-            Role regularUser = roleRepository.findByName(ERole.USER)
-                    .orElseThrow(() -> new EntityNotFoundException("Couldn't find role: USER"));
+            Trait courageous = traitRepository.findByName(ETrait.COURAGEOUS)
+                    .orElseThrow(() -> new EntityNotFoundException("Couldn't find trait: COURAGEOUS."));
+            Trait caring = traitRepository.findByName(ETrait.CARING)
+                    .orElseThrow(() -> new EntityNotFoundException("Couldn't find trait: CARING"));
+            Trait perfectionist = traitRepository.findByName(ETrait.PERFECTIONIST)
+                    .orElseThrow(() -> new EntityNotFoundException("Couldn't find trait: PERFECTIONIST."));
+            Trait focused = traitRepository.findByName(ETrait.FOCUSED)
+                    .orElseThrow(() -> new EntityNotFoundException("Couldn't find trait: FOCUSED"));
 
             String[] names = {"Zi Quintero", "Arun Li", "Rikesh Singleton", "Fahim Craig", "Ema Crowther", "Hawa Santiago", "Xena Hull", "Rhodri Amin", "Leona Klein", "Ceara Gamble", "Bushra Sutherland", "Erika Emerson", "Reis Duggan", "Evalyn Bellamy", "Finlay Burks" , "Estelle Phelps", "Cairo Walsh", "Gracie-May Guest", "Eden Martin", "Evie-Rose Knights", "Gino King", "Danyal Whitley"};
 
             for(int i = 0; i < 3; i++) {
                 User user = User.builder().username("User" + i).email("my_email" + i + "@gmail.com").password("my_pass" + i)
                         .fullName(getRandomName(names))
-                        .roles(new HashSet<Role>(asList(regularUser))).build();
+                        .traits(new HashSet<Trait>(asList(courageous, caring))).build();
                 userRepository.save(user);
             }
 
             User adminUser = User.builder().username("Admin Bob").email("admin_pass_bob@gmail.com").password("adminPass")
                     .fullName(getRandomName(names))
-                    .roles(new HashSet<Role>(asList(admin))).build();
+                    .traits(new HashSet<Trait>(asList(perfectionist))).build();
             userRepository.save(adminUser);
 
             User adminAndUser = User.builder().username("Admin/User Marty").email("admin_RegUser_marty@gmail.com").password("anotherAdminPass")
                     .fullName(getRandomName(names))
-                    .roles(new HashSet<Role>(asList(admin, regularUser))).build();
+                    .traits(new HashSet<Trait>(asList(focused, perfectionist))).build();
             userRepository.save(adminAndUser);
 
 

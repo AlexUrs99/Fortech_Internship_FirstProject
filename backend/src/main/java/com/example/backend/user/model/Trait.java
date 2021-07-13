@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class Role {
+public class Trait {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,5 +20,5 @@ public class Role {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 32)
-    private ERole name;
+    private ETrait name;
 }

@@ -28,9 +28,11 @@ export class AddmodalComponent implements OnInit {
         Validators.required,
         Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')
       ]),
-      roles: this.fb.group({
-        user: new FormControl(false),
-        administrator: new FormControl(false)
+      traits: this.fb.group({
+        courageous: new FormControl(false),
+        caring: new FormControl(false),
+        focused: new FormControl(false),
+        perfectionist: new FormControl(false),
       })
     })
   }
@@ -52,7 +54,7 @@ export class AddmodalComponent implements OnInit {
   }
 
   get roles() {
-    return this.addForm.get('roles')
+    return this.addForm.get('traits')
   }
 
   closeAddModal() {
