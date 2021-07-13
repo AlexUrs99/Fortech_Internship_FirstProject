@@ -47,7 +47,7 @@ export class UsersComponent implements OnInit {
   }
 
   performPostAddRequest(user: User) {
-    user.roles = this.convertToArrayRoles(user);
+    user.traits = this.convertToArrayRoles(user);
     this.addUser(user);
     this.showingAddModal = false
   }
@@ -85,15 +85,15 @@ export class UsersComponent implements OnInit {
   performEditPutRequest(receivedUserBody: User) {
     this.showingEditModal = false
     console.log(receivedUserBody)
-    receivedUserBody.roles = this.convertToArrayRoles(receivedUserBody);
+    receivedUserBody.traits = this.convertToArrayRoles(receivedUserBody);
     this.editUser(receivedUserBody, this.toEditUser.id);
 
   }
 
   private convertToArrayRoles(receivedUserBody : any): String[] {
     let array: String[] = []
-    Object.keys(receivedUserBody.roles).forEach(element => {
-      if(receivedUserBody.roles[element] === true)
+    Object.keys(receivedUserBody.traits).forEach(element => {
+      if(receivedUserBody.traits[element] === true)
       array.push(element.toUpperCase())
     });
     console.log(array)
