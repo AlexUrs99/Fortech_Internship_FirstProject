@@ -1,5 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import { EventEmitter } from '@angular/core';
 export class HeaderComponent implements OnInit {
   @Output() onAddButtonClicked = new EventEmitter()
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit(): void {
   }

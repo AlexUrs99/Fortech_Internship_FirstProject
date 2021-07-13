@@ -1,15 +1,22 @@
-
-<p>
-    <mat-toolbar color="warn">
+ <mat-toolbar color="warn">
      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
     </button>
-    <span>Just a toolbar</span>
-    <span class="example-spacer"></span>
+
+
+    
     <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
             (click)="toggleAddModal()">
       <span style="margin-left:20px; font-size: 25px;" >Add user</span>
       <mat-icon>add</mat-icon>
     </button>
+
+    <div class="example-spacer">
+      <button class="btn" (click)="router.navigate(['']);">
+        <mat-icon>arrow_back</mat-icon>
+
+      </button>
+    </div>
+
   </mat-toolbar>
-  </p>
+

@@ -12,13 +12,13 @@ const routes: Routes = [
   },
 
   {
-    path: 'users',
-    component: UsersComponent
+    path: 'users/:id',
+    component: UserCardComponent
   },
 
   {
-    path: 'users/:username',
-    component: UserCardComponent
+    path: 'users',
+    component: UsersComponent
   },
 
   {
