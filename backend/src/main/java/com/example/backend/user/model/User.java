@@ -35,6 +35,9 @@ public class User {
     @Column(length = 64, nullable = false)
     private String fullName;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Gender gender;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_traits",
             joinColumns = @JoinColumn(name = "user_id"),

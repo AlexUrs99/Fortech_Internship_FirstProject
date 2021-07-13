@@ -18,4 +18,5 @@ public class UserDTO {
     private String password;
     private String fullName;
     private Set<String> traits;
+    private String gender;
 }

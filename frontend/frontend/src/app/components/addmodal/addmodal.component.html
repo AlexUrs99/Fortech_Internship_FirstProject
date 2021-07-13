@@ -68,6 +68,16 @@
             </div>
             <br>
 
+            <h2>Gender: </h2>
+            
+            <mat-radio-group formControlName="gender">
+                <mat-radio-button value="MALE">Male</mat-radio-button>
+                <mat-radio-button value="FEMALE">Female</mat-radio-button>
+                <mat-radio-button value="APACHE_HELICOPTER">Apache Helicopter</mat-radio-button>
+            </mat-radio-group>
+            <br>
+
+
             <button mat-raised-button color="primary" type="submit" [disabled]="!addForm.valid">Submit</button>
         </form>
         </div>
