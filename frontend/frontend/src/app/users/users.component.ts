@@ -68,6 +68,9 @@ export class UsersComponent implements OnInit {
     this.userService.deleteUser(user.id).subscribe(
       () => {
         console.log('success when deleting')
+        this.users = this.users.filter((u) => {
+          return u.id !== user.id
+        })
       },
       (error: HttpErrorResponse) => {
         alert(error.message)
