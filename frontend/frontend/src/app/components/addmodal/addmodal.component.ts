@@ -1,5 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/User';
 
 @Component({
@@ -7,12 +10,12 @@ import { User } from 'src/app/User';
   templateUrl: './addmodal.component.html',
   styleUrls: ['./addmodal.component.css']
 })
-export class AddmodalComponent implements OnInit {
+export class AddModalComponent implements OnInit {
   addForm: FormGroup;
   @Output() onCloseAdd = new EventEmitter()
   @Output() onAddFormSubmitted = new EventEmitter()
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, public router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     this.addForm = this.fb.group({
@@ -62,15 +65,28 @@ export class AddmodalComponent implements OnInit {
     return this.addForm.get('gender')
   }
 
-  closeAddModal() {
-    this.onCloseAdd.emit()
-  }
-
   onSubmit() {
     const userBody: User = this.addForm.value
-    // const userId: number = this.editedUser.id
-    // console.log(userBody);
-    this.onAddFormSubmitted.emit(userBody)
+    userBody.traits = this.convertToArrayRoles(userBody)
+    
+    this.userService.createUser(userBody).subscribe(
+      (response: User) => {
+        this.router.navigate(['/users'])
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message)
+      }
+    )
+  }
+
+  private convertToArrayRoles(receivedUserBody : any): String[] {
+    let array: String[] = []
+    Object.keys(receivedUserBody.traits).forEach(element => {
+      if(receivedUserBody.traits[element] === true)
+      array.push(element.toUpperCase())
+    });
+    console.log(array)
+    return array
   }
 
 }

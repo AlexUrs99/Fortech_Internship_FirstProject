@@ -2,6 +2,7 @@
 <app-header 
     (onAddButtonClicked)="toggleAddModal()">
 </app-header>
+
 <app-user-card *ngFor="let user of users"
              [user]="user"
              (editModalTrigger)="toggleEditModal(user)"
@@ -10,9 +11,8 @@
 
 <div>
     <app-editmodal *ngIf="showingEditModal"
-                    [editedUser]="toEditUser"
                     (onCloseEditModal)="closeEditModal()"
-                    (onEditFormSubmitted)="performEditPutRequest($event)"
+                    
      ></app-editmodal>
 </div>
 
@@ -27,8 +27,7 @@
 <div>
     <app-addmodal *ngIf="showingAddModal"
                 (onCloseAdd)="toggleAddModal()"
-                (onAddFormSubmitted)="performPostAddRequest($event)"
-
     >
     </app-addmodal>
+
 </div>

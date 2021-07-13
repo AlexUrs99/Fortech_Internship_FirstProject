@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddModalComponent } from './components/addmodal/addmodal.component';
+import { EditModalComponent } from './components/editmodal/editmodal.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
@@ -12,8 +15,19 @@ const routes: Routes = [
   },
 
   {
-    path: 'users/:id',
-    component: UserCardComponent
+    path: 'details/:id',
+    component: UserDetailsComponent
+
+  },
+
+  {
+    path: 'add',
+    component: AddModalComponent
+  },
+
+  {
+    path: 'edit/:id',
+    component:EditModalComponent
   },
 
   {

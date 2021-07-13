@@ -4,7 +4,7 @@
 
             <div class="miniHeader">
                 <h1>Add Modal </h1>
-                <i class="fas fa-times fa-3x" style="color:crimson" (click)="closeAddModal()"></i>
+                <i class="fas fa-times fa-3x" style="color:crimson" (click)="router.navigate(['/users']);"></i>
             </div>
             
         <form [formGroup]="addForm" (ngSubmit)="onSubmit()" >

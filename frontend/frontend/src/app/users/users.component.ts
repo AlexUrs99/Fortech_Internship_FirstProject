@@ -46,23 +46,6 @@ export class UsersComponent implements OnInit {
     this.showingDeleteModal = false
   }
 
-  performPostAddRequest(user: User) {
-    user.traits = this.convertToArrayRoles(user);
-    this.addUser(user);
-    this.showingAddModal = false
-  }
-
-  public addUser(user: User) {
-    this.userService.createUser(user).subscribe(
-      (response: User) => {
-        this.users.push(user)
-      },
-      (error : HttpErrorResponse) => {
-        alert(error.message)
-      }
-    )
-  }
-
   public deleteUser(user: User) : void {
     console.log(user)
     this.userService.deleteUser(user.id).subscribe(
@@ -81,37 +64,6 @@ export class UsersComponent implements OnInit {
     this.showingDeleteModal = false
     this.deleteUser(user)
   }
-
-  performEditPutRequest(receivedUserBody: User) {
-    this.showingEditModal = false
-    console.log(receivedUserBody)
-    receivedUserBody.traits = this.convertToArrayRoles(receivedUserBody);
-    this.editUser(receivedUserBody, this.toEditUser.id);
-
-  }
-
-  private convertToArrayRoles(receivedUserBody : any): String[] {
-    let array: String[] = []
-    Object.keys(receivedUserBody.traits).forEach(element => {
-      if(receivedUserBody.traits[element] === true)
-      array.push(element.toUpperCase())
-    });
-    console.log(array)
-    return array
-  }
-
-  public editUser(userBody: User, userId: number) {
-    console.log(userBody, userId)
-    this.userService.editUser(userBody, userId).subscribe(
-      (response: User) => {
-        console.log('Added user')
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message)
-      }
-    )
-  }
-
 
   public getUsers(): void  {
      this.userService.getUsers().subscribe(

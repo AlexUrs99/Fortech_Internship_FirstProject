@@ -8,8 +8,10 @@
 }
 
 body {
+    font-family: "Poppins", sans-serif;
     background-color: white;
-}
+    margin: 0;
+  }
 
 .page_404  img{ width:100%;}
 
