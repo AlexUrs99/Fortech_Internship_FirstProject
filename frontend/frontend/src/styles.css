@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
 
 
-/* body {
+body {
   font-family: "Poppins", sans-serif;
-  background-color: cornsilk;
+  background-color: #1A2226;
   margin: 0;
-} */
+}
 
-.container {
+/* .container {
   max-width: 700px;
   margin: 30px auto;
   border: 5px solid black;
@@ -15,7 +15,7 @@
   padding: 30px;
   background-color: grey;
   font-family: "Poppins", sans-serif;
-}
+} */
 
 .mat-button.mat-success,
 .mat-stroked-button.mat-success {
