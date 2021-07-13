@@ -1,10 +1,9 @@
 package com.example.backend.user.service;
 
 import com.example.backend.user.mapper.UserMapper;
-import com.example.backend.user.model.ETrait;
-import com.example.backend.user.model.Trait;
-import com.example.backend.user.model.User;
+import com.example.backend.user.model.*;
 import com.example.backend.user.model.dto.UserDTO;
+import com.example.backend.user.repository.GenderRepository;
 import com.example.backend.user.repository.TraitRepository;
 import com.example.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +23,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final TraitRepository traitRepository;
+    private final GenderRepository genderRepository;
     private final UserMapper userMapper;
 
     public List<UserDTO> getAllUsers() {
@@ -38,7 +38,7 @@ public class UserService {
         return userMapper.toDTO(foundUser);
     }
 
-    public UserDTO createUser(@RequestBody UserDTO userDTO) {
+    public UserDTO createUser(UserDTO userDTO) {
 
         User userToBeCreated = new User();
 
@@ -51,11 +51,13 @@ public class UserService {
         userToBeCreated.setEmail(userDTO.getEmail());
         userToBeCreated.setFullName(userDTO.getFullName());
 
+
         if (!userDTO.getPassword().equals("")) {
             userToBeCreated.setPassword(userDTO.getPassword());
         }
 
         userToBeCreated.setTraits(mapTraits(userDTO.getTraits()));
+        userToBeCreated.setGender(mapGender(userDTO.getGender()));
 
         User savedUser = userRepository.save(userToBeCreated);
         return userMapper.toDTO(savedUser);
@@ -66,6 +68,11 @@ public class UserService {
                 .map(trait -> traitRepository.findByName(ETrait.valueOf(trait))
                         .orElseThrow(() -> new EntityNotFoundException("Couldn't find trait: " + trait.toUpperCase())))
                 .collect(Collectors.toSet());
+    }
+
+    private Gender mapGender(String gender) {
+        return genderRepository.findByName(EGender.valueOf(gender))
+                .orElseThrow(() -> new EntityNotFoundException("Couldn't find gender: " + gender.toUpperCase()));
     }
 
     private void verifyDataUnique(User actUser, UserDTO user) {
@@ -79,13 +86,16 @@ public class UserService {
 
     public UserDTO editUser(Long id, UserDTO user) {
         User actUser = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
+
         actUser.setTraits(mapTraits(user.getTraits()));
+        actUser.setGender(mapGender(user.getGender()));
 
         verifyDataUnique(actUser, user);
 
         actUser.setEmail(user.getEmail());
         actUser.setUsername(user.getUsername());
         actUser.setFullName(user.getFullName());
+
 
         if (!user.getPassword().equals("")) {
             actUser.setPassword(user.getPassword());

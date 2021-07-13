@@ -12,14 +12,14 @@ export class AddmodalComponent implements OnInit {
   @Output() onCloseAdd = new EventEmitter()
   @Output() onAddFormSubmitted = new EventEmitter()
 
-  constructor(private fb : FormBuilder) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.addForm = this.fb.group({
       username: new FormControl(null, [
         Validators.required
       ]),
-      fullName:  new FormControl(null),
+      fullName: new FormControl(null),
       email: new FormControl(null, [
         Validators.required,
         Validators.email
@@ -33,7 +33,8 @@ export class AddmodalComponent implements OnInit {
         caring: new FormControl(false),
         focused: new FormControl(false),
         perfectionist: new FormControl(false),
-      })
+      }),
+      gender: new FormControl(false)
     })
   }
 
@@ -53,8 +54,12 @@ export class AddmodalComponent implements OnInit {
     return this.addForm.get('fullName')
   }
 
-  get roles() {
+  get traits() {
     return this.addForm.get('traits')
+  }
+
+  get gender() {
+    return this.addForm.get('gender')
   }
 
   closeAddModal() {
@@ -62,7 +67,7 @@ export class AddmodalComponent implements OnInit {
   }
 
   onSubmit() {
-    const userBody : User = this.addForm.value
+    const userBody: User = this.addForm.value
     // const userId: number = this.editedUser.id
     // console.log(userBody);
     this.onAddFormSubmitted.emit(userBody)

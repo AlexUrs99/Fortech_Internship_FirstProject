@@ -1,8 +1,7 @@
 package com.example.backend;
 
-import com.example.backend.user.model.ETrait;
-import com.example.backend.user.model.Trait;
-import com.example.backend.user.model.User;
+import com.example.backend.user.model.*;
+import com.example.backend.user.repository.GenderRepository;
 import com.example.backend.user.repository.TraitRepository;
 import com.example.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +22,7 @@ public class Bootstrap implements ApplicationListener<ApplicationReadyEvent> {
 
     private final UserRepository userRepository;
     private final TraitRepository traitRepository;
+    private final GenderRepository genderRepository;
 
     @Value("${app.boostrap}")
     private boolean bootstrap;
@@ -38,10 +38,16 @@ public class Bootstrap implements ApplicationListener<ApplicationReadyEvent> {
         if (bootstrap) {
             userRepository.deleteAll();
             traitRepository.deleteAll();
+            genderRepository.deleteAll();
 
             for (ETrait value : ETrait.values()) {
                 traitRepository.save(Trait.builder().name(value).build());
             }
+
+            for (EGender value : EGender.values()) {
+                genderRepository.save(Gender.builder().name(value).build());
+            }
+
 
             Trait courageous = traitRepository.findByName(ETrait.COURAGEOUS)
                     .orElseThrow(() -> new EntityNotFoundException("Couldn't find trait: COURAGEOUS."));
@@ -52,23 +58,37 @@ public class Bootstrap implements ApplicationListener<ApplicationReadyEvent> {
             Trait focused = traitRepository.findByName(ETrait.FOCUSED)
                     .orElseThrow(() -> new EntityNotFoundException("Couldn't find trait: FOCUSED"));
 
+            Gender male = genderRepository.findByName(EGender.MALE)
+                    .orElseThrow(() -> new EntityNotFoundException("Couldn't find gender: MALE"));
+            Gender female = genderRepository.findByName(EGender.FEMALE)
+                    .orElseThrow(() -> new EntityNotFoundException("Couldn't find gender: FEMALE."));
+            Gender helicopter = genderRepository.findByName(EGender.APACHE_HELICOPTER)
+                    .orElseThrow(() -> new EntityNotFoundException("Couldn't find gender: APACHE_HELICOPTER"));
+
             String[] names = {"Zi Quintero", "Arun Li", "Rikesh Singleton", "Fahim Craig", "Ema Crowther", "Hawa Santiago", "Xena Hull", "Rhodri Amin", "Leona Klein", "Ceara Gamble", "Bushra Sutherland", "Erika Emerson", "Reis Duggan", "Evalyn Bellamy", "Finlay Burks" , "Estelle Phelps", "Cairo Walsh", "Gracie-May Guest", "Eden Martin", "Evie-Rose Knights", "Gino King", "Danyal Whitley"};
 
             for(int i = 0; i < 3; i++) {
                 User user = User.builder().username("User" + i).email("my_email" + i + "@gmail.com").password("my_pass" + i)
                         .fullName(getRandomName(names))
-                        .traits(new HashSet<Trait>(asList(courageous, caring))).build();
+                        .traits(new HashSet<Trait>(asList(courageous, caring)))
+                        .gender(male)
+                        .build();
+
                 userRepository.save(user);
             }
 
             User adminUser = User.builder().username("Admin Bob").email("admin_pass_bob@gmail.com").password("adminPass")
                     .fullName(getRandomName(names))
-                    .traits(new HashSet<Trait>(asList(perfectionist))).build();
+                    .traits(new HashSet<Trait>(asList(perfectionist)))
+                    .gender(female)
+                    .build();
             userRepository.save(adminUser);
 
             User adminAndUser = User.builder().username("Admin/User Marty").email("admin_RegUser_marty@gmail.com").password("anotherAdminPass")
                     .fullName(getRandomName(names))
-                    .traits(new HashSet<Trait>(asList(focused, perfectionist))).build();
+                    .traits(new HashSet<Trait>(asList(focused, perfectionist)))
+                    .gender(helicopter)
+                    .build();
             userRepository.save(adminAndUser);
 
 

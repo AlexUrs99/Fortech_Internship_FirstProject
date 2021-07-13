@@ -25,6 +25,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RouterModule } from '@angular/router';
 import { routingComponents } from './app-routing.module';
 import { UsersComponent } from './users/users.component';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 
 @NgModule({
@@ -55,7 +57,8 @@ import { UsersComponent } from './users/users.component';
     MatInputModule,
     MatToolbarModule,
     MatIconModule,
-    RouterModule
+    RouterModule,
+    MatRadioModule
 
   ],
   providers: [UserService],

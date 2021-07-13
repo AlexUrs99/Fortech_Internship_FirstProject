@@ -31,7 +31,8 @@ export class EditmodalComponent implements OnInit {
         focused: this.editedUser.traits.includes('FOCUSED'),
         caring: this.editedUser.traits.includes('CARING'),
         perfectionist: this.editedUser.traits.includes('PERFECTIONIST')
-      })
+      }),
+      gender: new FormControl(this.editedUser.gender)
     })
   }
 

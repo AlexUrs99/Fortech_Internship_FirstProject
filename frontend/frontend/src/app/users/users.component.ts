@@ -100,7 +100,6 @@ export class UsersComponent implements OnInit {
     return array
   }
 
-
   public editUser(userBody: User, userId: number) {
     console.log(userBody, userId)
     this.userService.editUser(userBody, userId).subscribe(
