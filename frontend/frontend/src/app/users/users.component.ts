@@ -55,7 +55,7 @@ export class UsersComponent implements OnInit {
   public addUser(user: User) {
     this.userService.createUser(user).subscribe(
       (response: User) => {
-        console.log('created', user)
+        this.users.push(user)
       },
       (error : HttpErrorResponse) => {
         alert(error.message)
@@ -104,7 +104,7 @@ export class UsersComponent implements OnInit {
     console.log(userBody, userId)
     this.userService.editUser(userBody, userId).subscribe(
       (response: User) => {
-        console.log('success');
+        console.log('Added user')
       },
       (error: HttpErrorResponse) => {
         alert(error.message)
