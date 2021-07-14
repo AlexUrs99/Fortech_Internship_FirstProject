@@ -5,7 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Data
@@ -16,7 +19,6 @@ public class UserDTO {
     private Long id;
     private String email;
     private String username;
-    @NotEmpty
     private String password;
     private String fullName;
     private Set<String> traits;

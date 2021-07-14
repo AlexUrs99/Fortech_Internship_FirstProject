@@ -8,5 +8,4 @@ import java.util.Optional;
 
 public interface GenderRepository extends JpaRepository<Gender, Long> {
     Optional<Gender> findByName(EGender valueOf);
-
 }
