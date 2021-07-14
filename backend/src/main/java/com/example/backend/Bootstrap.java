@@ -24,7 +24,7 @@ public class Bootstrap implements ApplicationListener<ApplicationReadyEvent> {
     private final TraitRepository traitRepository;
     private final GenderRepository genderRepository;
 
-    @Value("${app.boostrap}")
+    @Value("${app.bootstrap}")
     private boolean bootstrap;
 
     private String getRandomName(String[] names) {

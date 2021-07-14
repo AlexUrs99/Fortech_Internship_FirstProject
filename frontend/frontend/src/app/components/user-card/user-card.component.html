@@ -1,7 +1,7 @@
 <div class="container">
    <div class="miniheader">
       <i class="fas fa-user fa-4x"></i>
-      <h1>{{ user.fullName }}</h1>
+      <a [routerLink]="['/details', user.id]"><h1>{{ user.fullName }}</h1></a>
    </div>
 
     <mat-divider></mat-divider>
@@ -34,6 +34,8 @@
 
     <div class="lilCel">
       <h4>Gender: </h4><span>{{ user.gender }}</span>
+
+      
 
       <mat-divider></mat-divider>  
     </div>

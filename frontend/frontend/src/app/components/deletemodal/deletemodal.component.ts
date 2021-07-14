@@ -9,7 +9,7 @@ import { User } from 'src/app/User';
   templateUrl: './deletemodal.component.html',
   styleUrls: ['./deletemodal.component.css']
 })
-export class DeletemodalComponent implements OnInit {
+export class DeleteModalComponent implements OnInit {
   @Input() toDeleteUser: User
   @Output() onDeleteButton = new EventEmitter()
   @Output() what = new EventEmitter<User>()

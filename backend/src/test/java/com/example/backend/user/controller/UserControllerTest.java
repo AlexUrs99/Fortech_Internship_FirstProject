@@ -17,6 +17,7 @@ import java.util.List;
 import static com.example.backend.TestCreationFactory.*;
 import static com.example.backend.UrlMapping.ENTITY;
 import static com.example.backend.UrlMapping.USERS;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -44,6 +45,23 @@ class UserControllerTest extends BaseControllerTest {
         ResultActions result = mockMvc.perform(get(USERS));
         result.andExpect(status().isOk())
                 .andExpect(jsonContentToBe(userDTOList));
+    }
+
+    @Test
+    void getUserById() throws Exception {
+        long id = randomLong();
+        UserDTO user = UserDTO.builder()
+                .id(id)
+                .email(randomEmail())
+                .username(randomString())
+                .fullName(randomString())
+                .password(randomString())
+                .build();
+        when(userService.getUserById(id)).thenReturn(user);
+
+        mockMvc.perform(get(USERS + "/" + user.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonContentToBe(user));
     }
 
     @Test
@@ -86,5 +104,6 @@ class UserControllerTest extends BaseControllerTest {
                 .build();
         ResultActions result = performDeleteWithPathVariable(USERS + ENTITY, user.getId().toString());
         result.andExpect(status().isOk());
+
     }
 }

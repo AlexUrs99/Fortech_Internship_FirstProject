@@ -4,47 +4,99 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { User } from 'src/app/User';
 import { EventEmitter } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-editmodal',
   templateUrl: './editmodal.component.html',
   styleUrls: ['./editmodal.component.css']
 })
-export class EditmodalComponent implements OnInit {
-  @Input() editedUser: User;
-  @Output() onCloseEditModal = new EventEmitter()
-  @Output() onEditFormSubmitted = new EventEmitter<User>()
-  editForm: FormGroup;
-  
+export class EditModalComponent implements OnInit {
+  myUser: User = {
+    id: -1,
+    username: "foo",
+    fullName: "bar",
+    email: "foo@example.com",
+    password: "foo123",
+    traits: ['FOCUSED'],
+    gender: 'APACHE_HELICOPTER'
+  }
+  myUserId: Number
+  editForm: FormGroup =  this.fb.group({
+    username: new FormControl(this.myUser.username),
+    fullName: new FormControl(this.myUser.fullName),
+    email: new FormControl(this.myUser.email),
+    password: new FormControl(this.myUser.password),
+    traits: this.fb.group({
+      courageous: this.myUser.traits.includes('COURAGEOUS'),
+      focused: this.myUser.traits.includes('FOCUSED'),
+      caring: this.myUser.traits.includes('CARING'),
+      perfectionist: this.myUser.traits.includes('PERFECTIONIST')
+    }),
+    gender: new FormControl(this.myUser.gender)
+  })
 
-  constructor(private fb : FormBuilder) { }
 
-  ngOnInit(): void {
 
-    this.editForm = this.fb.group({
-      username: new FormControl(this.editedUser.username),
-      fullName:  new FormControl(this.editedUser.fullName),
-      email: new FormControl(this.editedUser.email),
-      password: new FormControl(this.editedUser.password),
-      traits: this.fb.group({
-        courageous: this.editedUser.traits.includes('COURAGEOUS'),
-        focused: this.editedUser.traits.includes('FOCUSED'),
-        caring: this.editedUser.traits.includes('CARING'),
-        perfectionist: this.editedUser.traits.includes('PERFECTIONIST')
-      }),
-      gender: new FormControl(this.editedUser.gender)
-    })
+  constructor(private fb: FormBuilder, public router: Router, private userService: UserService, private route:ActivatedRoute) { 
+
   }
 
-  closeEditModal() {
-    this.onCloseEditModal.emit()
+  ngOnInit(): void {
+    this.route.paramMap
+    .subscribe(params => {
+      this.myUserId = Number(params.get('id'))
+
+      this.userService.getUserAtId(this.myUserId.valueOf()).subscribe((u) => {
+        this.myUser = u;
+
+        this.editForm = this.fb.group({
+          username: new FormControl(this.myUser.username),
+          fullName: new FormControl(this.myUser.fullName),
+          email: new FormControl(this.myUser.email),
+          password: new FormControl(this.myUser.password),
+          traits: this.fb.group({
+            courageous: this.myUser.traits.includes('COURAGEOUS'),
+            focused: this.myUser.traits.includes('FOCUSED'),
+            caring: this.myUser.traits.includes('CARING'),
+            perfectionist: this.myUser.traits.includes('PERFECTIONIST')
+          }),
+          gender: new FormControl(this.myUser.gender)
+        })
+      },
+      (error : HttpErrorResponse) => 
+        alert(error.message)
+      )
+    })
+    
+
+  }
+
+  private convertToArrayRoles(receivedUserBody: any): String[] {
+    let array: String[] = []
+    Object.keys(receivedUserBody.traits).forEach(element => {
+      if (receivedUserBody.traits[element] === true)
+        array.push(element.toUpperCase())
+    });
+    console.log(array)
+    return array
   }
 
   onSubmit() {
-    const userBody : User = this.editForm.value
-    // const userId: number = this.editedUser.id
-    // console.log(userBody);
-    this.onEditFormSubmitted.emit(userBody)
-  }
+    const userBody: User = this.editForm.value
+    console.log(this.myUserId)
 
+    userBody.traits = this.convertToArrayRoles(userBody)
+
+    this.userService.editUser(userBody, +this.myUserId).subscribe(
+      (response: User) => {
+        this.router.navigate(['/users'])
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message)
+      }
+    )
+  }
 }
+

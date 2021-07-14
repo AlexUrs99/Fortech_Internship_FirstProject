@@ -4,7 +4,7 @@
 
             <div class="miniHeader">
                 <h1>Edit Modal </h1>
-                <i class="fas fa-times fa-3x" style="color:crimson" (click)="closeEditModal()"></i>
+                <i class="fas fa-times fa-3x" style="color:crimson" (click)="router.navigate(['/users'])"></i>
             </div>
             
         <form [formGroup]="editForm" (ngSubmit)="onSubmit()" >
@@ -15,28 +15,28 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Username: </mat-label>
-                <input matInput placeholder="{{ editedUser.username }}" formControlName="username">
+                <input matInput placeholder="{{ myUser.username }}" formControlName="username">
             </mat-form-field>
 
             <br>
 
             <mat-form-field appearance="outline">
                 <mat-label>Email: </mat-label>
-                <input matInput placeholder="{{ editedUser.email }}" formControlName="email">
+                <input matInput placeholder="{{ myUser.email }}" formControlName="email">
             </mat-form-field>
 
             <br>
 
             <mat-form-field appearance="outline">
                 <mat-label>Full name: </mat-label>
-                <input matInput placeholder="{{ editedUser.fullName }}" formControlName="fullName">
+                <input matInput placeholder="{{ myUser.fullName }}" formControlName="fullName">
             </mat-form-field>
 
             <br>
 
             <mat-form-field appearance="outline">
                 <mat-label>Password: </mat-label>
-                <input matInput placeholder="{{ editedUser.password }}" formControlName="password">
+                <input matInput placeholder="{{ myUser.password }}" formControlName="password">
             </mat-form-field>
 
             <br>

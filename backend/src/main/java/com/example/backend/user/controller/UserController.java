@@ -5,6 +5,7 @@ import com.example.backend.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static com.example.backend.UrlMapping.ENTITY;

@@ -1,5 +1,6 @@
 package com.example.backend.user.service;
 
+import com.example.backend.user.exception.ApiRequestException;
 import com.example.backend.user.mapper.UserMapper;
 import com.example.backend.user.model.*;
 import com.example.backend.user.model.dto.UserDTO;
@@ -9,7 +10,6 @@ import com.example.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityNotFoundException;
@@ -34,7 +34,7 @@ public class UserService {
 
     public UserDTO getUserById(Long id) {
         User foundUser = userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Couldn't find user at id: " + id));
+                .orElseThrow(() -> new ApiRequestException("Couldn't find user at id: " + id));
         return userMapper.toDTO(foundUser);
     }
 
@@ -52,9 +52,9 @@ public class UserService {
         userToBeCreated.setFullName(userDTO.getFullName());
 
 
-        if (!userDTO.getPassword().equals("")) {
-            userToBeCreated.setPassword(userDTO.getPassword());
-        }
+//        if (!userDTO.getPassword().equals("")) {
+//            userToBeCreated.setPassword(userDTO.getPassword());
+//        }
 
         userToBeCreated.setTraits(mapTraits(userDTO.getTraits()));
         userToBeCreated.setGender(mapGender(userDTO.getGender()));
@@ -77,10 +77,10 @@ public class UserService {
 
     private void verifyDataUnique(User actUser, UserDTO user) {
         if (!actUser.getUsername().equals(user.getUsername()) && userRepository.existsByUsername(user.getUsername())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username " + user.getUsername() + " already exists");
         }
         if (!actUser.getEmail().equals(user.getEmail()) && userRepository.existsByEmail(user.getEmail())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already exists");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email " + user.getEmail() + " already exists");
         }
     }
 
