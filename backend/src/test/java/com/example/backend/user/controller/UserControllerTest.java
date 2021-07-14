@@ -17,6 +17,7 @@ import java.util.List;
 import static com.example.backend.TestCreationFactory.*;
 import static com.example.backend.UrlMapping.ENTITY;
 import static com.example.backend.UrlMapping.USERS;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -103,5 +104,6 @@ class UserControllerTest extends BaseControllerTest {
                 .build();
         ResultActions result = performDeleteWithPathVariable(USERS + ENTITY, user.getId().toString());
         result.andExpect(status().isOk());
+
     }
 }
