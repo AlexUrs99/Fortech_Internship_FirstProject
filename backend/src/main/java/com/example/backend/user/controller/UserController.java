@@ -5,6 +5,7 @@ import com.example.backend.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static com.example.backend.UrlMapping.ENTITY;
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserDTO createUser(@RequestBody UserDTO userDTO) {
+    public UserDTO createUser( @Valid @RequestBody UserDTO userDTO) {
         return userService.createUser(userDTO);
     }
 

@@ -47,6 +47,23 @@ class UserControllerTest extends BaseControllerTest {
     }
 
     @Test
+    void getUserById() throws Exception {
+        long id = randomLong();
+        UserDTO user = UserDTO.builder()
+                .id(id)
+                .email(randomEmail())
+                .username(randomString())
+                .fullName(randomString())
+                .password(randomString())
+                .build();
+        when(userService.getUserById(id)).thenReturn(user);
+
+        mockMvc.perform(get(USERS + "/" + user.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonContentToBe(user));
+    }
+
+    @Test
     void createUser() throws Exception {
         UserDTO user = UserDTO.builder()
                 .id(randomLong())

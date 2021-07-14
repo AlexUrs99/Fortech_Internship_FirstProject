@@ -16,12 +16,10 @@ public class ApiExceptionHandler {
         //1. Create a payload to send inside the response entity ( it contains exception details )
         ApiException payload = ApiException.builder()
                 .message(e.getMessage())
-                .throwable(e)
                 .status(HttpStatus.BAD_REQUEST)
                 .timestamp(ZonedDateTime.now(ZoneId.of("Z")))
                 .build();
         //2. Return the response entity
         return new ResponseEntity<>(payload, HttpStatus.BAD_REQUEST);
-
     }
 }
