@@ -52,9 +52,9 @@ public class UserService {
         userToBeCreated.setFullName(userDTO.getFullName());
 
 
-//        if (!userDTO.getPassword().equals("")) {
-//            userToBeCreated.setPassword(userDTO.getPassword());
-//        }
+        if (!userDTO.getPassword().equals("")) {
+            userToBeCreated.setPassword(userDTO.getPassword());
+        }
 
         userToBeCreated.setTraits(mapTraits(userDTO.getTraits()));
         userToBeCreated.setGender(mapGender(userDTO.getGender()));
