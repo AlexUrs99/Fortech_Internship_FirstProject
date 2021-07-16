@@ -92,12 +92,7 @@ class UserServiceTest {
 
         UserDTO fetchedUser = userService.getUserById(user.getId());
 
-        assertEquals(fetchedUser.getEmail(), user.getEmail());
-        assertEquals(fetchedUser.getUsername(), user.getUsername());
-        assertEquals(fetchedUser.getPassword(), user.getPassword());
-        assertEquals(fetchedUser.getFullName(), user.getFullName());
-        assertEquals(fetchedUser.getTraits(), user.getTraits());
-        assertEquals(fetchedUser.getGender(), user.getGender());
+        assertEquals(fetchedUser, userDTO);
     }
 
     @Test
